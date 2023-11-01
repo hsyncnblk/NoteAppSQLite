@@ -1,11 +1,12 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
 }
 
 android {
     namespace = "com.hsyncnblk.noteappsqlite"
-    compileSdk = 33
+    compileSdk = 34
 
     buildFeatures{
         viewBinding = true
