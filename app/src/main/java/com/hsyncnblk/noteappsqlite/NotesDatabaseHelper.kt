@@ -15,7 +15,7 @@ class NotesDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE
         private const val TABLE_NAME ="allnotes"
         private const val COLUMN_ID ="id"
         private const val COLUMN_TITLE ="title"
-        private const val COLUMN_CONTENT ="content"
+        private const val COLUMN_CONTENT ="title"
 
     }
 
