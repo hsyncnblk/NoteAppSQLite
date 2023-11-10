@@ -5,12 +5,15 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.hsyncnblk.noteappsqlite.databinding.NoteItemBinding
 
 
 class NotesAdapter(private var notes : List<Note> , private val context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+
+    private val db:NotesDatabaseHelper = NotesDatabaseHelper(context)
 
     class NoteViewHolder(val noteItemBinding: NoteItemBinding) : RecyclerView.ViewHolder(noteItemBinding.root)
 
@@ -40,8 +43,12 @@ class NotesAdapter(private var notes : List<Note> , private val context: Context
 
             editor.putInt("note_id",note.id)
             editor.apply()
+        }
 
-
+        holder.noteItemBinding.deleteButton.setOnClickListener {
+            db.deleteNote(note.id)
+            refreshData(db.getAllNotes())
+            Toast.makeText(context,"Note deleted",Toast.LENGTH_SHORT).show()
         }
 
 
