@@ -1,11 +1,16 @@
 package com.hsyncnblk.noteappsqlite
 
+
+import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.hsyncnblk.noteappsqlite.databinding.NoteItemBinding
 
-class NotesAdapter(private var notes : List<Note>) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
+
+class NotesAdapter(private var notes : List<Note> , private val context: Context) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     class NoteViewHolder(val noteItemBinding: NoteItemBinding) : RecyclerView.ViewHolder(noteItemBinding.root)
 
@@ -22,6 +27,25 @@ class NotesAdapter(private var notes : List<Note>) : RecyclerView.Adapter<NotesA
         val note = notes[position]
         holder.noteItemBinding.titleTv.text = note.title
         holder.noteItemBinding.contentTv.text = note.content
+
+        holder.noteItemBinding.updateButton.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_mainFragment_to_updateFragment)
+
+
+//            val bundle = Bundle()
+//            bundle.putInt("note_id",note.id)
+
+            val sharedPrefernces = context.getSharedPreferences("mySharedPrefernces",Context.MODE_PRIVATE)
+            val editor = sharedPrefernces.edit()
+
+            editor.putInt("note_id",note.id)
+            editor.apply()
+
+
+        }
+
+
+
     }
 
     fun refreshData(newNotes : List<Note>){

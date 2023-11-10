@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         db = NotesDatabaseHelper(requireActivity())
-        notesAdapter = NotesAdapter(db.getAllNotes())
+        notesAdapter = NotesAdapter(db.getAllNotes(),requireActivity())
 
         binding.notesRV.layoutManager=LinearLayoutManager(requireActivity())
         binding.notesRV.adapter=notesAdapter
